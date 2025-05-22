@@ -6,7 +6,7 @@ using KutipSmart.Models;
 using System;
 using KutipSmart.Models;
 
-namespace ResumeManager_Mrhumi.Controllers
+namespace KutipSmart.Controllers
 {
     public class ScheduleController : Controller
     {
