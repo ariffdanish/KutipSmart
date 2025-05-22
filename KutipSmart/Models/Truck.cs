@@ -25,6 +25,7 @@ namespace KutipSmart.Models
         public string Phone { get; set; }
         [Display(Name = "Company")]
         public string Company { get; set; }
+        [Display(Name ="Created")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
