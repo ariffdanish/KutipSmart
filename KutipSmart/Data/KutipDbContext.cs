@@ -18,10 +18,9 @@ namespace KutipSmart.Data
         }
 
         
-        public DbSet<Truck> Trucks { get; set; }
-        @*public DbSet<Models.Route> Routes { get; set; }*@
-        public DbSet<Bin> RouteStops { get; set; }
-        
+        public DbSet<Truck> Trucks { get; set; } = null!;
+        public DbSet<Bin> RouteStops { get; set; } = null!;
+
 
     }
 }
