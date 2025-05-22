@@ -1,0 +1,63 @@
+﻿@model KutipSmart.Models.Truck
+
+@{
+    ViewData["Title"] = "Edit Truck";
+}
+
+<h1 class="mb-4"><i data-feather="edit-3"></i> Edit Truck</h1>
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+            <input type="hidden" asp-for="TruckId" />
+
+            <div class="mb-3">
+                <label asp-for="TruckNo" class="form-label"><i data-feather="hash"></i> Truck No</label>
+                <input asp-for="TruckNo" class="form-control" />
+                <span asp-validation-for="TruckNo" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Status" class="form-label"><i data-feather="activity"></i> Status</label>
+                <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<TruckStatus>()"></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="DriverName" class="form-label"><i data-feather="user"></i> Driver Name</label>
+                <input asp-for="DriverName" class="form-control" />
+                <span asp-validation-for="DriverName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Phone" class="form-label"><i data-feather="phone"></i> Phone</label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Company" class="form-label"><i data-feather="briefcase"></i> Company</label>
+                <input asp-for="Company" class="form-control" />
+                <span asp-validation-for="Company" class="text-danger"></span>
+            </div>
+
+            <!-- Hidden fields for timestamps (optional, can remove if handled in backend) -->
+            <input type="hidden" asp-for="CreatedAt" />
+            <input type="hidden" asp-for="UpdatedAt" />
+
+            <button type="submit" class="btn btn-success">
+                <i data-feather="save"></i> Save Changes
+            </button>
+            <a asp-action="Index" class="btn btn-secondary ms-2">
+                <i data-feather="arrow-left-circle"></i> Back to List
+            </a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>feather.replace()</script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
