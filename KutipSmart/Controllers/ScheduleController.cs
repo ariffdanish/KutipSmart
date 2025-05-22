@@ -10,9 +10,9 @@ namespace KutipSmart.Controllers
 {
     public class ScheduleController : Controller
     {
-        private readonly ResumeDbContext _context;
+        private readonly KutipDbContext _context;
 
-        public ScheduleController(ResumeDbContext context)
+        public ScheduleController(KutipDbContext context)
         {
             _context = context;
         }
