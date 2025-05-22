@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 
 namespace KutipSmart.Models
 {
     public class Bin
     {
+        [Key]
         public int Id { get; set; }
+        [Display(Name = "Bin")]
+        public string BinNo { get; set; } 
         public int RouteId { get; set; }
         public Route Route { get; set; }
         public double Latitude { get; set; }
