@@ -17,21 +17,13 @@ namespace KutipSmart.Data
         {
         }
 
-<<<<<<< HEAD
-
-        public DbSet<Truck> Trucks { get; set; } = null!;
-
-        public DbSet<Bin> Bin { get; set; } = null!;
-
-=======
-       
 
 
         public DbSet<Truck> Trucks { get; set; }
         
         public DbSet<Bin> Bin { get; set; }
         
->>>>>>> 7cf9d7a589d85661490415a0558b98b3a2321313
+
 
 
     }
