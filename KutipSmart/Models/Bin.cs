@@ -9,13 +9,11 @@ namespace KutipSmart.Models
         public int Id { get; set; }
         [Display(Name = "Bin")]
         public string BinNo { get; set; } 
-        public int RouteId { get; set; }
-        public Route Route { get; set; }
-        public double Latitude { get; set; }
-        public double Longitude { get; set; }
-        public string Address { get; set; }
-        public int Order { get; set; }
-        public bool IsCollected { get; set; }
-        public bool IsMissed { get; set; }
+        public string Street {  get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string PostCode {  get; set; }
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+        public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }
 }
