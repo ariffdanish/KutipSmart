@@ -6,7 +6,7 @@ namespace KutipSmart.Models
     public class Bin
     {
         [Key]
-        public int Id { get; set; }
+        public int BinId { get; set; }
 
         [Required(ErrorMessage = "Bin Number is required")]
         [Display(Name = "Bin")]

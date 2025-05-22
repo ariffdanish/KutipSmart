@@ -47,7 +47,7 @@ namespace KutipSmart.Controllers
             if (id == null)
                 return NotFound();
 
-            var bin = await _context.Bin.FirstOrDefaultAsync(b => b.Id == id);
+            var bin = await _context.Bin.FirstOrDefaultAsync(b => b.BinId == id);
 
             if (bin == null)
                 return NotFound();
@@ -73,7 +73,7 @@ namespace KutipSmart.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Bin bin)
         {
-            if (id != bin.Id)
+            if (id != bin.BinId)
                 return NotFound();
 
             if (ModelState.IsValid)
@@ -85,7 +85,7 @@ namespace KutipSmart.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BinExists(bin.Id))
+                    if (!BinExists(bin.BinId))
                         return NotFound();
                     else
                         throw;
@@ -97,7 +97,7 @@ namespace KutipSmart.Controllers
 
         private bool BinExists(int id)
         {
-            return _context.Bin.Any(e => e.Id == id);
+            return _context.Bin.Any(e => e.BinId == id);
         }
 
         // Controller: BinController.cs
@@ -109,7 +109,7 @@ namespace KutipSmart.Controllers
                 return NotFound();
 
             var bin = await _context.Bin
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.BinId == id);
             if (bin == null)
                 return NotFound();
 
