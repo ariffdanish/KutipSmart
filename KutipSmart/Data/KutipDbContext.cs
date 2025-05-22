@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using KutipSmart.Models;
 using Microsoft.EntityFrameworkCore;
-using Route = KutipSmart.Models.Route;
+//using Route = KutipSmart.Models.Route;
 
 
 
@@ -19,7 +19,7 @@ namespace KutipSmart.Data
 
         
         public DbSet<Truck> Trucks { get; set; }
-        public DbSet<Models.Route> Routes { get; set; }
+        //public DbSet<Models.Route> Routes { get; set; }
         public DbSet<Bin> RouteStops { get; set; }
         
 
