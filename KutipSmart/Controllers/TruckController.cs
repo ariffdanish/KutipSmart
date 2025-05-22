@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using KutipSmart.Data;
+using KutipSmart.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace KutipSmart.Controllers
 {
