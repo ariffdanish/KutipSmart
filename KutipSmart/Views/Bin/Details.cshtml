@@ -1,0 +1,53 @@
+﻿@model KutipSmart.Models.Bin
+
+@{
+    ViewData["Title"] = "Bin Details";
+}
+
+<section class="section">
+    <div class="card mx-auto shadow-sm border-0" style="max-width: 600px;">
+        <div class="card-header d-flex align-items-center gap-2">
+            <h4 class="mb-0"><i data-feather="eye"></i> Bin Details</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row">
+                <dt class="col-sm-4 fw-semibold">@Html.DisplayNameFor(m => m.BinNo)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(m => m.BinNo)</dd>
+
+                <dt class="col-sm-4 fw-semibold">@Html.DisplayNameFor(m => m.Street)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(m => m.Street)</dd>
+
+                <dt class="col-sm-4 fw-semibold">@Html.DisplayNameFor(m => m.City)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(m => m.City)</dd>
+
+                <dt class="col-sm-4 fw-semibold">@Html.DisplayNameFor(m => m.State)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(m => m.State)</dd>
+
+                <dt class="col-sm-4 fw-semibold">@Html.DisplayNameFor(m => m.PostCode)</dt>
+                <dd class="col-sm-8">@Html.DisplayFor(m => m.PostCode)</dd>
+
+                <dt class="col-sm-4 fw-semibold">@Html.DisplayNameFor(m => m.CreatedAt)</dt>
+                <dd class="col-sm-8">@Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</dd>
+
+                <dt class="col-sm-4 fw-semibold">@Html.DisplayNameFor(m => m.UpdatedAt)</dt>
+                <dd class="col-sm-8">@Model.UpdatedAt.ToString("yyyy-MM-dd HH:mm")</dd>
+            </dl>
+        </div>
+    </div>
+
+    <div class="mt-4 d-flex justify-content-center gap-2">
+        <a asp-action="Edit" asp-route-id="@Model.BinId" class="btn btn-primary d-flex align-items-center gap-2" title="Edit">
+            <i data-feather="edit"></i> Edit
+        </a>
+        <a asp-action="Index" class="btn btn-secondary d-flex align-items-center gap-2" title="Back to List">
+            <i data-feather="arrow-left"></i> Back to List
+        </a>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        feather.replace();
+    </script>
+}

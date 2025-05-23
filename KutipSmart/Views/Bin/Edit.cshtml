@@ -1,0 +1,67 @@
+﻿@model KutipSmart.Models.Bin
+
+@{
+    ViewData["Title"] = "Edit Bin";
+}
+
+<section class="section">
+    <div class="card shadow-sm border-0 mx-auto" style="max-width: 600px;">
+        <div class="card-header d-flex align-items-center gap-2">
+            <h4 class="mb-0"><i data-feather="edit-3"></i> Edit Bin</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" method="post" novalidate>
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                <input type="hidden" asp-for="BinId" />
+
+                <div class="mb-3">
+                    <label asp-for="BinNo" class="form-label"><i data-feather="hash"></i> Bin No</label>
+                    <input asp-for="BinNo" class="form-control" placeholder="Enter Bin Number" />
+                    <span asp-validation-for="BinNo" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Street" class="form-label"><i data-feather="map-pin"></i> Street</label>
+                    <input asp-for="Street" class="form-control" placeholder="Enter Street" />
+                    <span asp-validation-for="Street" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="City" class="form-label"><i data-feather="home"></i> City</label>
+                    <input asp-for="City" class="form-control" placeholder="Enter City" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="State" class="form-label"><i data-feather="map"></i> State</label>
+                    <input asp-for="State" class="form-control" placeholder="Enter State" />
+                    <span asp-validation-for="State" class="text-danger"></span>
+                </div>
+
+                <div class="mb-4">
+                    <label asp-for="PostCode" class="form-label"><i data-feather="hash"></i> PostCode</label>
+                    <input asp-for="PostCode" class="form-control" placeholder="Enter PostCode" />
+                    <span asp-validation-for="PostCode" class="text-danger"></span>
+                </div>
+
+                <input type="hidden" asp-for="CreatedAt" />
+                <input type="hidden" asp-for="UpdatedAt" />
+
+                <div class="d-flex align-items-center gap-2">
+                    <button type="submit" class="btn btn-success d-flex align-items-center gap-2">
+                        <i data-feather="save"></i> Save Changes
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary d-flex align-items-center gap-2">
+                        <i data-feather="arrow-left-circle"></i> Back to List
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>feather.replace()</script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}
