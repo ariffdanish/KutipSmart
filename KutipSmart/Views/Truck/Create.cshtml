@@ -4,62 +4,70 @@
     ViewData["Title"] = "Create Truck";
 }
 
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="card shadow-sm rounded-3">
-            <div class="card-body">
-                <div class="card-header">
-                    <h4 class="card-title" style="text-align:center">@ViewData["Title"]</h4>
-                </div>
-                <form asp-action="Create">
-                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+    <div class="col-md-12 col-sm-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Create Truck <small>Truck details form</small></h2>
+                <div class="clearfix"></div>
+            </div>
 
-                    <div class="mb-3">
-                        <i data-feather="truck"></i>
-                        <label asp-for="TruckNo" class="form-label"></label>
-                        <input asp-for="TruckNo" class="form-control" />
-                        <span asp-validation-for="TruckNo" class="text-danger"></span>
+            <div class="x_content">
+                <br />
+                <form asp-action="Create" class="form-horizontal form-label-left" novalidate>
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                    <div class="item form-group">
+                        <label asp-for="TruckNo" class="col-form-label col-md-3 col-sm-3 label-align"></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input asp-for="TruckNo" class="form-control" />
+                            <span asp-validation-for="TruckNo" class="text-danger"></span>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <i data-feather="clipboard"></i>
-                        <label asp-for="Status" class="form-label"></label>
-                        <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<TruckStatus>()"></select>
-                        <span asp-validation-for="Status" class="text-danger"></span>
+                    <div class="item form-group">
+                        <label asp-for="Status" class="col-form-label col-md-3 col-sm-3 label-align"></label>
+                        <div class="col-md-6 col-sm-6">
+                            <select asp-for="Status" class="form-control" asp-items="Html.GetEnumSelectList<TruckStatus>()"></select>
+                            <span asp-validation-for="Status" class="text-danger"></span>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <i data-feather="user"></i>
-                        <label asp-for="DriverName" class="form-label"></label>
-                        <input asp-for="DriverName" class="form-control" />
-                        <span asp-validation-for="DriverName" class="text-danger"></span>
+                    <div class="item form-group">
+                        <label asp-for="DriverName" class="col-form-label col-md-3 col-sm-3 label-align"></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input asp-for="DriverName" class="form-control" />
+                            <span asp-validation-for="DriverName" class="text-danger"></span>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <i data-feather="phone"></i>
-                        <label asp-for="Phone" class="form-label"></label>
-                        <input asp-for="Phone" class="form-control" />
-                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    <div class="item form-group">
+                        <label asp-for="Phone" class="col-form-label col-md-3 col-sm-3 label-align"></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input asp-for="Phone" class="form-control" />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <i data-feather="home"></i>
-                        <label asp-for="Company" class="form-label"></label>
-                        <input asp-for="Company" class="form-control" />
-                        <span asp-validation-for="Company" class="text-danger"></span>
+                    <div class="item form-group">
+                        <label asp-for="Company" class="col-form-label col-md-3 col-sm-3 label-align"></label>
+                        <div class="col-md-6 col-sm-6">
+                            <input asp-for="Company" class="form-control" />
+                            <span asp-validation-for="Company" class="text-danger"></span>
+                        </div>
                     </div>
 
-                    @* CreatedAt and UpdatedAt are managed in controller, no need to show *@
-
-                    <div class="d-flex justify-content-between mt-4">
-                        <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
-                        <button type="submit" class="btn btn-primary">Create</button>
+                    <div class="ln_solid"></div>
+                    <div class="item form-group">
+                        <div class="col-md-6 col-sm-6 offset-md-3">
+                            <a asp-action="Index" class="btn btn-secondary btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
+                            <button type="reset" class="btn btn-primary btn-sm">Reset</button>
+                            <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-save"></i> Submit</button>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-</div>
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")

@@ -1,196 +1,259 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>@ViewData["Title"] - Kutip Smart</title>
-    <script type="importmap"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="~/images/favicon.ico" type="image/ico" />
 
-    <link rel="stylesheet" href="~/assets/css/bootstrap.css">
-    <link rel="stylesheet" href="~/assets/vendors/chartjs/Chart.min.css">
-    <link rel="stylesheet" href="~/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
-    <link rel="stylesheet" href="~/assets/css/app.css">
-    <link rel="shortcut icon" href="~/assets/images/favicon.svg" type="image/x-icon">
+    <!-- Bootstrap -->
+    <link href="~/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="~/vendors/iCheck/skins/flat/green.css" rel="stylesheet">
 
+    <!-- bootstrap-progressbar -->
+    <link href="~/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="~/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="~/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="~/build/css/custom.min.css" rel="stylesheet">
+    <meta name="robots" content="index, nofollow">
+
+
+    @RenderSection("Styles", required: false)
 </head>
 
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <!-- Sidebar -->
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="index.html" class="site_title"><i class="fa fa-recycle"></i> <span>Kutip Smart</span></a>
+                    </div>
 
-<body>
+                    <div class="clearfix"></div>
 
-    @*------- Main Body --------*@
-    <div id="app">
+                    <!-- User Profile -->
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="~/images/user.png" alt="User" class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>Welcome,</span>
+                            <h2>@User.Identity?.Name</h2>
+                        </div>
+                    </div>
+                    <br />
 
+                    <!-- Sidebar Menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>Main Menu</h3>
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i> Dashboard</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Bin" asp-action="Index"><i class="fa fa-trash"></i> Bin Management</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Truck" asp-action="Index"><i class="fa fa-truck"></i> Truck Management</a>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-bar-chart"></i> Reports <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="#">Collection Reports</a></li>
+                                        <li><a href="#">Operational Reports</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
 
-
-        @*------- SideBar Navigation --------*@
-        <div id="sidebar" class='active'>
-            <div class="sidebar-wrapper active">
-                <div class="sidebar-header">
-                    <img src="~/assets/images/Kutip Smart.svg" alt="" srcset="">
+                    <!-- Sidebar Footer -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings" asp-controller="Settings" asp-action="Index">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen" onclick="toggleFullScreen()">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" asp-controller="Account" asp-action="Logout">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+                    </div>
                 </div>
-                <div class="sidebar-menu">
-                    <ul class="menu">
-
-                        <li class='sidebar-title'>Main Menu</li>
-
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" asp-area="" asp-controller="Home" asp-action="Index">
-                                <i data-feather="home" width="20"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" asp-area="" asp-controller="Bin" asp-action="Index">
-                                <i data-feather="trash" width="20"></i>
-                                <span>Bin Management</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" asp-area="" asp-controller="Truck" asp-action="Index">
-                                <i data-feather="truck" width="20"></i>
-                                <span>Truck Management</span>
-                            </a>
-                        </li>
-
-                        <li class="sidebar-item">
-                            <a class="sidebar-link" asp-area="" asp-controller="Home" asp-action="Index">
-                                <i data-feather="calendar" width="20"></i>
-                                <span>Scheduling</span>
-                            </a>
-                        </li>
-
-                    </ul>
-                </div>
-                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
             </div>
-        </div>
-        @*------- SideBar Navigation --------*@
 
-
-
-
-
-
-        @*------- Main Dashboard --------*@
-        <div id="main">
-            <nav class="navbar navbar-header navbar-expand navbar-light">
-                <a class="sidebar-toggler" href="#"><span class="navbar-toggler-icon"></span></a>
-                <button class="btn navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav d-flex align-items-center navbar-light ms-auto">
-                        <li class="dropdown nav-icon">
-                            <a href="#" data-bs-toggle="dropdown" class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
-                                <div class="d-lg-inline-block">
-                                    <i data-feather="bell"></i>
+            <!-- Top Navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                    <nav class="nav navbar-nav">
+                        <ul class="navbar-right">
+                            <li class="nav-item dropdown open" style="padding-left: 15px;">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="~/images/user.png" alt="">@User.Identity?.Name
+                                </a>
+                                <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-controller="Profile" asp-action="Index"><i class="fa fa-user pull-right"></i> Profile</a>
+                                    <a class="dropdown-item" asp-controller="Settings" asp-action="Index"><i class="fa fa-cog pull-right"></i> Settings</a>
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="Logout"><i class="fa fa-sign-out pull-right"></i> Log Out</a>
                                 </div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end dropdown-menu-large">
-                                <h6 class='py-2 px-4'>Notifications</h6>
-                                <ul class="list-group rounded-none">
-                                    <li class="list-group-item border-0 align-items-start">
-                                        <div class="avatar bg-success me-3">
-                                            <span class="avatar-content"><i data-feather="shopping-cart"></i></span>
-                                        </div>
-                                        <div>
-                                            <h6 class='text-bold'>New Order</h6>
-                                            <p class='text-xs'>
-                                                An order made by Ahmad Saugi for product Samsung Galaxy S69
-                                            </p>
+                            </li>
+
+                            <li role="presentation" class="nav-item dropdown open">
+                                <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-bell-o"></i>
+                                    <span class="badge bg-green">6</span>
+                                </a>
+                                <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
+                                            <span class="image"><img src="~/images/user.png" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>System Alert</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Bin #1234 is 90% full
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <div class="text-center">
+                                            <a class="dropdown-item" asp-controller="Notifications" asp-action="Index">
+                                                <strong>See All Alerts</strong>
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
                                         </div>
                                     </li>
                                 </ul>
-                            </div>
-                        </li>
-                        <li class="dropdown nav-icon me-2">
-                            <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                                <div class="d-lg-inline-block">
-                                    <i data-feather="mail"></i>
-                                </div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>
-                                <a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>
-                                <a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
-                            </div>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" data-bs-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                                <div class="avatar me-1">
-                                    <img src="~/assets/images/avatar/avatar-s-1.png" alt="" srcset="">
-                                </div>
-                                <div class="d-none d-md-block d-lg-inline-block">Hi, Saugi</div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>
-                                <a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>
-                                <a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
-                            </div>
-                        </li>
-                    </ul>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
-            </nav>
-
-            <div class="main-content container-fluid">
-                <div class="page-title">
-                    <h3>@ViewData["Title"]</h3>
-                </div>
-                <section class="section">
-                    @RenderBody()
-                </section>
-
             </div>
-            @*------- Main Dashboard --------*@
 
-
-
-
-
-
-            @*------- Footer --------*@
-            <footer>
-                <div class="footer clearfix mb-0 text-muted">
-                    <div class="float-start">
-                        <p>@DateTime.Now.Year &copy; Kutip Smart</p>
-                    </div>
-                    <div class="float-end">
-                        <p>AspireX 2025</p>
+            <!-- Main Content -->
+            <div class="right_col" role="main">
+                <!-- Page Title -->
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>@ViewData["Title"]</h3>
                     </div>
                 </div>
+
+                <div class="clearfix"></div>
+
+                <!-- Content Area -->
+                <div class="row">
+                    <div class="col-md-12 col-sm-12">
+                        <div class="x_panel">
+                            <div class="x_content">
+                                @RenderBody()
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <footer>
+                <div class="pull-right">
+                    Kutip Smart - Waste Management System &copy; @DateTime.Now.Year
+                </div>
+                <div class="clearfix"></div>
             </footer>
-            @*------- Footer --------*@
-
-
-
         </div>
     </div>
-    @*------- Main Body --------*@
-
-
 
     @*------- JavaScript --------*@
-    <script src="~/assets/js/feather-icons/feather.min.js"></script>
-    <script src="~/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="~/assets/js/app.js"></script>
-    <script src="~/assets/vendors/chartjs/Chart.min.js"></script>
-    <script src="~/assets/vendors/apexcharts/apexcharts.min.js"></script>
-    <script src="~/assets/js/pages/dashboard.js"></script>
-    <script src="~/assets/js/main.js"></script>
-    @*------- JavaScript --------*@
+        <!-- jQuery -->
+        <script src="~/vendors/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap -->
+        <script src="~/vendors/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- FastClick -->
+        <script src="~/vendors/fastclick/lib/fastclick.js"></script>
+        <!-- NProgress -->
+        <script src="~/vendors/nprogress/nprogress.js"></script>
+        <!-- Chart.js -->
+        <script src="~/vendors/Chart.js/dist/Chart.min.js"></script>
+        <!-- gauge.js -->
+        <script src="~/vendors/gauge.js/dist/gauge.min.js"></script>
+        <!-- bootstrap-progressbar -->
+        <script src="~/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+        <!-- iCheck -->
+        <script src="~/vendors/iCheck/icheck.min.js"></script>
+        <!-- Skycons -->
+        <!-- Flot -->
+        <script src="~/vendors/Flot/jquery.flot.js"></script>
+        <script src="~/vendors/Flot/jquery.flot.pie.js"></script>
+        <script src="~/vendors/skycons/skycons.js"></script>
+        <script src="~/vendors/Flot/jquery.flot.time.js"></script>
+        <script src="~/vendors/Flot/jquery.flot.stack.js"></script>
+        <script src="~/vendors/Flot/jquery.flot.resize.js"></script>
+        <!-- Flot plugins -->
+        <script src="~/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+        <script src="~/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+        <script src="~/vendors/flot.curvedlines/curvedLines.js"></script>
+        <!-- DateJS -->
+        <script src="~/vendors/DateJS/build/date.js"></script>
+        <!-- JQVMap -->
+        <script src="~/vendors/jqvmap/dist/jquery.vmap.js"></script>
+        <script src="~/vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+        <script src="~/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+        <!-- bootstrap-daterangepicker -->
+        <script src="~/vendors/moment/min/moment.min.js"></script>
+        <script src="~/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+        <!-- Datatables -->
+        <script src="~/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="~/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+        <script src="~/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="~/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+        <script src="~/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+        <script src="~/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+        <script src="~/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+        <script src="~/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+        <script src="~/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+        <script src="~/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="~/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+        <script src="~/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+        <script src="~/vendors/jszip/dist/jszip.min.js"></script>
+        <script src="~/vendors/pdfmake/build/pdfmake.min.js"></script>
+        <script src="~/vendors/pdfmake/build/vfs_fonts.js"></script>
 
 
+        <!-- Custom Theme Scripts -->
+        <script src="../build/js/custom.min.js"></script>
+            @*------- JavaScript --------*@
 
-    @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+    </script>
 
-
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
-
