@@ -1,24 +1,21 @@
 using System.Diagnostics;
 using KutipSmart.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using KutipSmart.Data;
 
 namespace KutipSmart.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly KutipDbContext _context;
+        private readonly ILogger<HomeController> _logger;
 
-            public HomeController(KutipDbContext context)
+        public HomeController(ILogger<HomeController> logger)
         {
-            _context = context;
+            _logger = logger;
         }
 
-            public async Task<IActionResult> IndexAsync()
+        public IActionResult Index()
         {
-            var trucks = await _context.Trucks.ToListAsync();
-            return View(trucks);
+            return View();
         }
 
         public IActionResult Privacy()
