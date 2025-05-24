@@ -38,6 +38,7 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="~/assets/css/demo.css" />
 </head>
+<<<<<<< HEAD
 <body>
     <div class="wrapper">
         <!-- Sidebar -->
@@ -58,6 +59,69 @@
                         <button class="btn btn-toggle sidenav-toggler">
                             <i class="gg-menu-left"></i>
                         </button>
+=======
+
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <!-- Sidebar -->
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="index.html" class="site_title"><i class="fa fa-recycle"></i> <span>Kutip Smart</span></a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <!-- User Profile -->
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="~/images/user.png" alt="User" class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>Welcome,</span>
+                            <h2>@User.Identity?.Name</h2>
+                        </div>
+                    </div>
+                    <br />
+
+                    <!-- Sidebar Menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <h3>Main Menu</h3>
+                            <ul class="nav side-menu">
+                                <li>
+                                    <a asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i> Dashboard</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Bins" asp-action="Index"><i class="fa fa-trash"></i> Bin Management</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Truck" asp-action="Index"><i class="fa fa-truck"></i> Truck Management</a>
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-bar-chart"></i> Reports <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="#">Collection Reports</a></li>
+                                        <li><a href="#">Operational Reports</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar Footer -->
+                    <div class="sidebar-footer hidden-small">
+                        <a data-toggle="tooltip" data-placement="top" title="Settings" asp-controller="Settings" asp-action="Index">
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="FullScreen" onclick="toggleFullScreen()">
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                        </a>
+                        <a data-toggle="tooltip" data-placement="top" title="Logout" asp-controller="Account" asp-action="Logout">
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                        </a>
+>>>>>>> ca78920a66b165b924ecbaa763ffc7db4b8d723f
                     </div>
                     <button class="topbar-toggler more">
                         <i class="gg-more-vertical-alt"></i>
