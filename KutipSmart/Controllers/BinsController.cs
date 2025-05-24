@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace KutipSmart.Controllers
 {
-    public class BinController : Controller
+    public class BinsController : Controller
     {
         private readonly KutipDbContext _context;
         
-        public BinController(KutipDbContext context)
+        public BinsController(KutipDbContext context)
         {
             _context = context;
         }
