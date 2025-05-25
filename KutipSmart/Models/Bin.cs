@@ -3,6 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace KutipSmart.Models
 {
+    // Define the enum OUTSIDE the class
+    public enum BinStatus
+    {
+        Active,
+        Inactive
+    }
+
     public class Bin
     {
         [Key]
@@ -10,6 +17,7 @@ namespace KutipSmart.Models
 
         [Required(ErrorMessage = "Bin Number is required")]
         [Display(Name = "Bin")]
+        [RegularExpression(@"^BIN\d{4}$", ErrorMessage = "Bin Number must be in the format 'BIN0001'")]
         public string BinNo { get; set; }
 
         [Required(ErrorMessage = "Street is required")]
@@ -27,6 +35,10 @@ namespace KutipSmart.Models
         [Required(ErrorMessage = "PostCode is required")]
         [Display(Name = "PostCode")]
         public string PostCode { get; set; }
+
+        [Required]
+        [Display(Name = "Status")]
+        public BinStatus Status { get; set; } = BinStatus.Active;
 
         [Display(Name = "Created")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;

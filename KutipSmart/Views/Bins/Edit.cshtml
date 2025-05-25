@@ -44,6 +44,15 @@
                     <span asp-validation-for="PostCode" class="text-danger"></span>
                 </div>
 
+                <div class="mb-4">
+                    <label asp-for="Status" class="form-label"><i data-feather="toggle-right"></i> Status</label>
+                    <select asp-for="Status" class="form-select" asp-items="Html.GetEnumSelectList<KutipSmart.Models.BinStatus>()">
+                        <option value="">-- Select Status --</option>
+                    </select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+
+
                 <input type="hidden" asp-for="CreatedAt" />
                 <input type="hidden" asp-for="UpdatedAt" />
 
