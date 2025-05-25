@@ -7,7 +7,7 @@
     <link rel="icon" href="~/assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
 
     <!-- Fonts and icons -->
-    <script src="~/assets/js/plugin/webfont/webfont.min.js"></script>
+    <script src="@Url.Content("~/assets/js/plugin/webfont/webfont.min.js")"></script>
     <script>
         WebFont.load({
           google: { families: ["Public Sans:300,400,500,600,700"] },
@@ -18,7 +18,7 @@
               "Font Awesome 5 Brands",
               "simple-line-icons",
             ],
-            urls: ["assets/css/fonts.min.css"],
+            urls: ["@Url.Content("~/assets/css/fonts.min.css")"],
           },
           active: function () {
             sessionStorage.fonts = true;
