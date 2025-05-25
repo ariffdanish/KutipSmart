@@ -4,52 +4,73 @@
     ViewData["Title"] = "Delete Truck";
 }
 
+<div class="container">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Truck")">Trucks</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Delete Truck</li>
+        </ol>
+    </nav>
 
+    <div class="page-inner">
+        
+        <div class="page-header mb-3">
+            <h3 class="fw-bold"><i data-feather="trash-2" class="me-2"></i>@ViewData["Title"]</h3>
+        </div>
 
-<div class="alert alert-warning d-flex align-items-center" role="alert">
-    <i data-feather="alert-triangle" class="me-2"></i>
-    <div>
-        You are about to permanently delete this truck record. This action cannot be undone.
+        <div class="alert alert-warning d-flex align-items-center" role="alert">
+            <i data-feather="alert-triangle" class="me-2"></i>
+            <div>
+                <strong>Warning:</strong> You are about to permanently delete this truck record. This action <strong>cannot</strong> be undone.
+            </div>
+        </div>
+
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h5 class="card-title fw-semibold mb-3">
+                    <i data-feather="truck" class="me-1"></i> Truck Details
+                </h5>
+                <hr />
+                <dl class="row">
+                    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.TruckNo)</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.TruckNo)</dd>
+
+                    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Status)</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Status)</dd>
+
+                    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.DriverName)</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.DriverName)</dd>
+
+                    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Phone)</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Phone)</dd>
+
+                    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Company)</dt>
+                    <dd class="col-sm-9">@Html.DisplayFor(model => model.Company)</dd>
+
+                    <dt class="col-sm-3">@Html.DisplayNameFor(model => model.CreatedAt)</dt>
+                    <dd class="col-sm-9">@Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</dd>
+
+                </dl>
+
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="TruckId" />
+                    <button type="submit" class="btn btn-danger">
+                        <i data-feather="trash-2"></i> Confirm Delete
+                    </button>
+                    <a asp-action="Index" class="btn btn-secondary ms-2">
+                        <i data-feather="arrow-left-circle"></i> Back to List
+                    </a>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 
-<div class="card shadow-sm border-0">
-    <div class="card-body">
-        <h5 class="card-title"><i data-feather="truck"></i> Truck Details</h5>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.TruckNo)</dt>
-            <dd class="col-sm-9">@Html.DisplayFor(model => model.TruckNo)</dd>
-
-            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Status)</dt>
-            <dd class="col-sm-9">@Html.DisplayFor(model => model.Status)</dd>
-
-            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.DriverName)</dt>
-            <dd class="col-sm-9">@Html.DisplayFor(model => model.DriverName)</dd>
-
-            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Phone)</dt>
-            <dd class="col-sm-9">@Html.DisplayFor(model => model.Phone)</dd>
-
-            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.Company)</dt>
-            <dd class="col-sm-9">@Html.DisplayFor(model => model.Company)</dd>
-
-            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.CreatedAt)</dt>
-            <dd class="col-sm-9">@Html.DisplayFor(model => model.CreatedAt)</dd>
-
-            <dt class="col-sm-3">@Html.DisplayNameFor(model => model.UpdatedAt)</dt>
-            <dd class="col-sm-9">@Html.DisplayFor(model => model.UpdatedAt)</dd>
-        </dl>
-
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="TruckId" />
-            <button type="submit" class="btn btn-danger">
-                <i data-feather="trash-2"></i> Confirm Delete
-            </button>
-            <a asp-action="Index" class="btn btn-secondary ms-2">
-                <i data-feather="arrow-left-circle"></i> Back to List
-            </a>
-        </form>
-    </div>
-</div>
-
-
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+    <script>
+        feather.replace();
+    </script>
+}
