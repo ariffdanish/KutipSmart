@@ -35,6 +35,7 @@ namespace KutipSmart.Models
         // Navigation properties
         [ForeignKey("BinId")]
         public virtual Bin Bin { get; set; }
+        
 
         [ForeignKey("TruckId")]
         public virtual Truck Truck { get; set; }
@@ -42,9 +43,9 @@ namespace KutipSmart.Models
 
     public enum ScheduleStatus
     {
-        Scheduled,
-        Completed,
-        Missed,
-        Reassigned
+        Scheduled = 0,
+        Completed = 1,
+        Missed = 2,
+        Reassigned = 3
     }
 }
