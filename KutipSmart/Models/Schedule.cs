@@ -23,21 +23,16 @@ namespace KutipSmart.Models
 
         [Required]
         [Display(Name = "Schedule Status")]
-        [EnumDataType(typeof(ScheduleStatus))]
-        public ScheduleStatus Status { get; set; } = ScheduleStatus.Scheduled;
+        public ScheduleStatus Status { get; set; }
 
         [Display(Name = "Created")]
-        public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
+        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         [Display(Name = "Last Updated")]
-        public DateTimeOffset UpdatedAt { get; set; } = DateTimeOffset.Now;
+        public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
-        // Navigation properties
-        [ForeignKey("BinId")]
+        // Navigation properties (must be virtual for lazy loading)
         public virtual Bin Bin { get; set; }
-        
-
-        [ForeignKey("TruckId")]
         public virtual Truck Truck { get; set; }
     }
 
