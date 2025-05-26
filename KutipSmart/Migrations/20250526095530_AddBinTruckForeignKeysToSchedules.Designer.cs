@@ -4,6 +4,7 @@ using KutipSmart.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KutipSmart.Migrations
 {
     [DbContext(typeof(KutipDbContext))]
-    partial class KutipDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250526095530_AddBinTruckForeignKeysToSchedules")]
+    partial class AddBinTruckForeignKeysToSchedules
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

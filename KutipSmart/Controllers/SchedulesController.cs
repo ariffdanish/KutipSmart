@@ -24,7 +24,7 @@ public class SchedulesController : Controller
     // GET: Schedules/Create
     public IActionResult Create()
     {
-        ViewData["BinId"] = new SelectList(_context.Bins, "BinId", "Location");
+        ViewData["BinId"] = new SelectList(_context.Bin, "BinId", "Location");
         ViewData["TruckId"] = new SelectList(_context.Trucks, "TruckId", "PlateNumber");
         return View();
     }
@@ -41,7 +41,7 @@ public class SchedulesController : Controller
             return RedirectToAction(nameof(Index));
         }
 
-        ViewData["BinId"] = new SelectList(_context.Bins, "BinId", "Location", schedule.BinId);
+        ViewData["BinId"] = new SelectList(_context.Bin, "BinId", "Location", schedule.BinId);
         ViewData["TruckId"] = new SelectList(_context.Trucks, "TruckId", "PlateNumber", schedule.TruckId);
         return View(schedule);
     }
@@ -54,7 +54,7 @@ public class SchedulesController : Controller
         var schedule = await _context.Schedules.FindAsync(id);
         if (schedule == null) return NotFound();
 
-        ViewData["BinId"] = new SelectList(_context.Bins, "BinId", "Location", schedule.BinId);
+        ViewData["BinId"] = new SelectList(_context.Bin, "BinId", "Location", schedule.BinId);
         ViewData["TruckId"] = new SelectList(_context.Trucks, "TruckId", "PlateNumber", schedule.TruckId);
         return View(schedule);
     }
@@ -68,12 +68,23 @@ public class SchedulesController : Controller
 
         if (ModelState.IsValid)
         {
-            _context.Update(schedule);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Update(schedule);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.Schedules.Any(e => e.ScheduleId == id))
+                    return NotFound();
+                else
+                    throw;
+            }
+
             return RedirectToAction(nameof(Index));
         }
 
-        ViewData["BinId"] = new SelectList(_context.Bins, "BinId", "Location", schedule.BinId);
+        ViewData["BinId"] = new SelectList(_context.Bin, "BinId", "Location", schedule.BinId);
         ViewData["TruckId"] = new SelectList(_context.Trucks, "TruckId", "PlateNumber", schedule.TruckId);
         return View(schedule);
     }
@@ -104,6 +115,7 @@ public class SchedulesController : Controller
             _context.Schedules.Remove(schedule);
             await _context.SaveChangesAsync();
         }
+
         return RedirectToAction(nameof(Index));
     }
 

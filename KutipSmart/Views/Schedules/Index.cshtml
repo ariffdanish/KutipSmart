@@ -23,8 +23,8 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Bin?.Location</td>
-                <td>@item.Truck?.PlateNumber</td>
+                <td>@item.Bin?.BinNo</td>
+                <td>@item.Truck?.TruckNo</td>
                 <td>@item.ScheduledDateTime.ToString("g")</td>
                 <td>@item.Status</td>
                 <td>
