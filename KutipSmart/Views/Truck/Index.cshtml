@@ -46,6 +46,10 @@
                                     {
                                         <tr>
                                             <td>@Html.DisplayFor(modelItem => item.TruckNo)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.DriverName)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Company)</td>
+                                            <td>@item.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
                                             <td>
                                                 @{
                                                     var status = item.Status.ToString();
@@ -58,10 +62,6 @@
                                                 }
                                                 <span class="@badgeClass">@status</span>
                                             </td>
-                                            <td>@Html.DisplayFor(modelItem => item.DriverName)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Phone)</td>
-                                            <td>@Html.DisplayFor(modelItem => item.Company)</td>
-                                            <td>@item.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
                                             <td>
                                                 <a asp-action="Edit" asp-route-id="@item.TruckId" class="btn btn-warning btn-sm" title="Edit">
                                                     <i class="fa fa-edit"></i>
