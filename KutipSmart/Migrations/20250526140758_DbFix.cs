@@ -5,7 +5,7 @@
 namespace KutipSmart.Migrations
 {
     /// <inheritdoc />
-    public partial class AddBinTruckForeignKeysToSchedules : Migration
+    public partial class DbFix : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -44,7 +44,6 @@ namespace KutipSmart.Models
         public DateTimeOffset UpdatedAt { get; set; } = DateTime.Now;
 
 
-        public ICollection<Schedule> Schedules { get; set; }
     }
 
     public enum TruckStatus

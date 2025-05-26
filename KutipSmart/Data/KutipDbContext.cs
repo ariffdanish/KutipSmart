@@ -20,7 +20,6 @@ namespace KutipSmart.Data
 
         public DbSet<Truck> Trucks { get; set; }
         public DbSet<Bin> Bin { get; set; }
-        public DbSet<Schedule> Schedules { get; set; }
 
 
     }
