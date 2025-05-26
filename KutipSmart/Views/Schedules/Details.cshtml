@@ -1,46 +1,23 @@
 ﻿@model KutipSmart.Models.Schedule
-
 @{
     ViewData["Title"] = "Schedule Details";
 }
 
-<h1>Schedule Details</h1>
+<h2>Schedule Details</h2>
 
-<div>
-    <h4>Schedule</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-3">
-            Bin ID
-        </dt>
-        <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.BinName)
-        </dd>
+<dl class="row">
+    <dt class="col-sm-3">Bin</dt>
+    <dd class="col-sm-9">@Model.Bin?.BinNo</dd>
 
-        <dt class="col-sm-3">
-            Lorry Plate Number
-        </dt>
-        <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.CollectorName)
-        </dd>
+    <dt class="col-sm-3">Truck</dt>
+    <dd class="col-sm-9">@Model.Truck?.TruckNo</dd>
 
-        <dt class="col-sm-3">
-            Scheduled Date and Time
-        </dt>
-        <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.ScheduledDateTime)
-        </dd>
+    <dt class="col-sm-3">Scheduled Time</dt>
+    <dd class="col-sm-9">@Model.ScheduledDateTime</dd>
 
-        <dt class="col-sm-3">
-            Status
-        </dt>
-        <dd class="col-sm-9">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-    </dl>
-</div>
+    <dt class="col-sm-3">Status</dt>
+    <dd class="col-sm-9">@Model.Status</dd>
+</dl>
 
-<div class="mt-3">
-    <a asp-action="Edit" asp-route-id="@Model?.ScheduleId" class="btn btn-warning me-2">Edit</a>
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
-</div>
+<a asp-action="Edit" asp-route-id="@Model.ScheduleId" class="btn btn-warning">Edit</a>
+<a asp-action="Index" class="btn btn-secondary">Back to List</a>

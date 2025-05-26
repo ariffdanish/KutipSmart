@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KutipSmart.Migrations
 {
     [DbContext(typeof(KutipDbContext))]
-    [Migration("20250526065908_createscheduletable")]
-    partial class createscheduletable
+    [Migration("20250526100443_AddCreatedAtToSchedule")]
+    partial class AddCreatedAtToSchedule
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -75,21 +75,29 @@ namespace KutipSmart.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScheduleId"));
 
-                    b.Property<string>("BinName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("BinId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("CollectorName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<DateTime>("ScheduledDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TruckId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
 
                     b.HasKey("ScheduleId");
+
+                    b.HasIndex("BinId");
+
+                    b.HasIndex("TruckId");
 
                     b.ToTable("Schedules");
                 });
@@ -134,6 +142,35 @@ namespace KutipSmart.Migrations
                     b.HasKey("TruckId");
 
                     b.ToTable("Trucks");
+                });
+
+            modelBuilder.Entity("KutipSmart.Models.Schedule", b =>
+                {
+                    b.HasOne("KutipSmart.Models.Bin", "Bin")
+                        .WithMany("Schedules")
+                        .HasForeignKey("BinId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KutipSmart.Models.Truck", "Truck")
+                        .WithMany("Schedules")
+                        .HasForeignKey("TruckId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Bin");
+
+                    b.Navigation("Truck");
+                });
+
+            modelBuilder.Entity("KutipSmart.Models.Bin", b =>
+                {
+                    b.Navigation("Schedules");
+                });
+
+            modelBuilder.Entity("KutipSmart.Models.Truck", b =>
+                {
+                    b.Navigation("Schedules");
                 });
 #pragma warning restore 612, 618
         }

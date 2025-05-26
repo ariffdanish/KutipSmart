@@ -44,5 +44,7 @@ namespace KutipSmart.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
+
+        public ICollection<Schedule> Schedules { get; set; }
     }
 }
