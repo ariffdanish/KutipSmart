@@ -1,0 +1,96 @@
+﻿@model KutipSmart.Models.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<h2>Dashboard Overview</h2>
+
+<div class="row mb-4">
+    <div class="col-md-3">
+        <div class="card text-white bg-success mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Total Bins</h5>
+                <p class="card-text">@Model.TotalBins</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-info mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Active Bins</h5>
+                <p class="card-text">@Model.ActiveBins</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-primary mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Total Trucks</h5>
+                <p class="card-text">@Model.TotalTrucks</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card text-white bg-warning mb-3">
+            <div class="card-body">
+                <h5 class="card-title">Trucks in Maintenance</h5>
+                <p class="card-text">@Model.TrucksUnderMaintenance</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr />
+
+<h3>Bin Details</h3>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Bin No</th>
+            <th>Street</th>
+            <th>City</th>
+            <th>State</th>
+            <th>PostCode</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bin in Model.Bins)
+        {
+            <tr>
+                <td>@bin.BinNo</td>
+                <td>@bin.Street</td>
+                <td>@bin.City</td>
+                <td>@bin.State</td>
+                <td>@bin.PostCode</td>
+                <td>@bin.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<h3>Truck Details</h3>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Truck No</th>
+            <th>Driver Name</th>
+            <th>Phone</th>
+            <th>Company</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var truck in Model.Trucks)
+        {
+            <tr>
+                <td>@truck.TruckNo</td>
+                <td>@truck.DriverName</td>
+                <td>@truck.Phone</td>
+                <td>@truck.Company</td>
+                <td>@truck.Status</td>
+            </tr>
+        }
+    </tbody>
+</table>
