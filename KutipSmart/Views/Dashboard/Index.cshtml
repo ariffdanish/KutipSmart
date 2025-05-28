@@ -1,57 +1,67 @@
-﻿@model KutipSmart.Models.DashboardViewModel
+﻿@model DashboardViewModel
 
 @{
     ViewData["Title"] = "Dashboard";
+    var cities = ViewBag.AllCities as List<string>;
+    //var statuses = ViewBag.AllStatuses as List<TruckStatus>;
+    var truckStatuses = ViewBag.AllTruckStatuses as List<TruckStatus>;
+    var truckNos = ViewBag.AllTruckNos as List<string>;
 }
 
-<h2>Dashboard Overview</h2>
+<h2 id="dashboardSection">Dashboard</h2>
 
-<div class="row mb-4">
-    <div class="col-md-3">
-        <div class="card text-white bg-success mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Total Bins</h5>
-                <p class="card-text">@Model.TotalBins</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card text-white bg-info mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Active Bins</h5>
-                <p class="card-text">@Model.ActiveBins</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card text-white bg-primary mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Total Trucks</h5>
-                <p class="card-text">@Model.TotalTrucks</p>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <div class="card text-white bg-warning mb-3">
-            <div class="card-body">
-                <h5 class="card-title">Trucks in Maintenance</h5>
-                <p class="card-text">@Model.TrucksUnderMaintenance</p>
-            </div>
-        </div>
-    </div>
-</div>
+
 
 <hr />
 
-<h3>Bin Details</h3>
-<table class="table table-bordered table-striped">
+@*Bin display*@
+<h3 class="mt-4">Bins</h3>
+
+<form asp-action="Index" method="get" class="row g-3 mb-3">
+    <div class="col-md-3">
+        <label for="cityFilter" class="form-label">Filter by City</label>
+        <select name="cityFilter" class="form-select" onchange="this.form.submit()">
+            <option value="">-- All Cities --</option>
+            @foreach (var city in cities)
+            {
+                var selectedAttr = city == ViewBag.SelectedCity ? "selected=\"selected\"" : "";
+                @Html.Raw($"<option value=\"{city}\" {selectedAttr}>{city}</option>")
+            }
+
+        </select>
+    </div>
+    <div class="col-md-3">
+        <label for="stateFilter" class="form-label">Filter by State</label>
+        <select name="stateFilter" class="form-select" onchange="this.form.submit()">
+            <option value="">-- All States --</option>
+            @foreach (var state in ViewBag.AllStates as List<string>)
+            {
+                var selectedAttr = state == ViewBag.SelectedState ? "selected=\"selected\"" : "";
+                @Html.Raw($"<option value=\"{state}\" {selectedAttr}>{state}</option>")
+            }
+
+        </select>
+    </div>
+    <div class="col-md-3">
+        <label for="binStatusFilter" class="form-label">Filter by Bin Status</label>
+        <select name="binStatusFilter" class="form-select" onchange="this.form.submit()">
+            <option value="">-- All Statuses --</option>
+            @foreach (var status in ViewBag.AllBinStatuses as List<BinStatus>)
+            {
+                <option value="@status" selected="@(status.ToString() == ViewBag.SelectedBinStatus?.ToString() ? "selected" : null)">
+                    @status
+                </option>
+            }
+        </select>
+    </div>
+</form>
+
+<table class="table table-bordered">
     <thead>
         <tr>
             <th>Bin No</th>
-            <th>Street</th>
             <th>City</th>
             <th>State</th>
-            <th>PostCode</th>
             <th>Status</th>
         </tr>
     </thead>
@@ -60,22 +70,54 @@
         {
             <tr>
                 <td>@bin.BinNo</td>
-                <td>@bin.Street</td>
                 <td>@bin.City</td>
                 <td>@bin.State</td>
-                <td>@bin.PostCode</td>
                 <td>@bin.Status</td>
             </tr>
         }
     </tbody>
 </table>
 
-<h3>Truck Details</h3>
+@*Bin display end*@
+<hr />
+@*Truck display*@
+<h4>Trucks</h4>
+<form asp-action="Index" method="get" class="row g-3 mb-3" id="truckFilterForm">
+    <div class="col-md-3">
+        <label for="truckNoFilter" class="form-label">Truck No</label>
+        <input list="truckNoList"
+               id="truckNoFilter"
+               name="truckNoFilter"
+               class="form-control"
+               placeholder="Type or select truck no"
+               value="@(ViewBag.SelectedTruckNo ?? "")"
+               onchange="submitTruckFilter()" />
+        <datalist id="truckNoList">
+            @foreach (var truckNo in truckNos)
+            {
+                <option value="@truckNo" />
+            }
+        </datalist>
+    </div>
+
+    <div class="col-md-3">
+        <label for="truckStatusFilter" class="form-label">Truck Status</label>
+        <select id="truckStatusFilter" name="truckStatusFilter" class="form-select" onchange="submitTruckFilter()">
+            <option value="">-- All Statuses --</option>
+            @foreach (var status in truckStatuses)
+            {
+                var selected = status.ToString() == (ViewBag.SelectedTruckStatus?.ToString() ?? "") ? "selected" : "";
+                @Html.Raw($"<option value=\"{status}\" {selected}>{status}</option>")
+            }
+        </select>
+    </div>
+</form>
+
 <table class="table table-bordered table-striped">
     <thead>
         <tr>
             <th>Truck No</th>
-            <th>Driver Name</th>
+            <th>Driver</th>
             <th>Phone</th>
             <th>Company</th>
             <th>Status</th>
@@ -94,3 +136,28 @@
         }
     </tbody>
 </table>
+@*Truck display end*@
+
+<script>
+    const citySelect = document.querySelector('select[name="cityFilter"]');
+    const stateSelect = document.querySelector('select[name="stateFilter"]');
+
+    citySelect.addEventListener('change', function () {
+        if (this.value) {
+            stateSelect.value = ""; // Clear state filter
+        }
+        this.form.submit(); // Submit after clearing
+    });
+
+    stateSelect.addEventListener('change', function () {
+        if (this.value) {
+            citySelect.value = ""; // Clear city filter
+        }
+        this.form.submit(); // Submit after clearing
+    });
+
+    function submitTruckFilter() {
+        document.getElementById('truckFilterForm').submit();
+    }
+</script>
+
