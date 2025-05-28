@@ -4,6 +4,7 @@ using KutipSmart.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KutipSmart.Migrations
 {
     [DbContext(typeof(KutipDbContext))]
-    partial class KutipDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250526172934_addscheduletable")]
+    partial class addscheduletable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -144,13 +147,13 @@ namespace KutipSmart.Migrations
             modelBuilder.Entity("KutipSmart.Models.Schedule", b =>
                 {
                     b.HasOne("KutipSmart.Models.Bin", "Bin")
-                        .WithMany("Schedules")
+                        .WithMany()
                         .HasForeignKey("BinId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("KutipSmart.Models.Truck", "Truck")
-                        .WithMany("Schedules")
+                        .WithMany()
                         .HasForeignKey("TruckId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -158,16 +161,6 @@ namespace KutipSmart.Migrations
                     b.Navigation("Bin");
 
                     b.Navigation("Truck");
-                });
-
-            modelBuilder.Entity("KutipSmart.Models.Bin", b =>
-                {
-                    b.Navigation("Schedules");
-                });
-
-            modelBuilder.Entity("KutipSmart.Models.Truck", b =>
-                {
-                    b.Navigation("Schedules");
                 });
 #pragma warning restore 612, 618
         }
