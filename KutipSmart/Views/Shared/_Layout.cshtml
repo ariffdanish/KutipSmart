@@ -6,6 +6,12 @@
     <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport" />
     <link rel="icon" href="~/assets/img/kaiadmin/favicon.ico" type="image/x-icon" />
 
+    <!-- chemi -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- chemi -->
+    
     <!-- Fonts and icons -->
     <script src="@Url.Content("~/assets/js/plugin/webfont/webfont.min.js")"></script>
     <script>
@@ -437,15 +443,7 @@
         <!-- Main Content -->
         <div class="container">
             <div class="page-inner">
-                <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
-                    <div>
-                        <h3 class="fw-bold mb-3">@ViewData["Title"]</h3>
-                    </div>
-                    <div class="ms-md-auto py-2 py-md-0">
-                        <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-print"></i> Print</a>
-                        <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-cog"></i> Settings</a>
-                    </div>
-                </div>
+               
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card card-round">
@@ -498,6 +496,9 @@
     <script src="~/assets/js/plugin/jsvectormap/world.js"></script>
     <script src="~/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
     <script src="~/assets/js/kaiadmin.min.js"></script>
+    <!-- jsvectormap -->
+    <script src="~/assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
+    <script src="~/assets/js/plugin/jsvectormap/world.js"></script>
 
     <script>
         $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
@@ -532,4 +533,33 @@
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+
+<script>
+    $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
+      type: "line",
+      height: "70",
+      width: "100%",
+      lineWidth: "2",
+      lineColor: "#177dff",
+      fillColor: "rgba(23, 125, 255, 0.14)",
+    });
+
+    $("#lineChart2").sparkline([99, 125, 122, 105, 110, 124, 115], {
+      type: "line",
+      height: "70",
+      width: "100%",
+      lineWidth: "2",
+      lineColor: "#f3545d",
+      fillColor: "rgba(243, 84, 93, .14)",
+    });
+
+    $("#lineChart3").sparkline([105, 103, 123, 100, 95, 105, 115], {
+      type: "line",
+      height: "70",
+      width: "100%",
+      lineWidth: "2",
+      lineColor: "#ffa534",
+      fillColor: "rgba(255, 165, 52, .14)",
+    });
+</script>
 

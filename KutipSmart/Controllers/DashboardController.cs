@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using KutipSmart.Data;
 using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace KutipSmart.Controllers
 {
@@ -24,8 +25,12 @@ namespace KutipSmart.Controllers
             TruckStatus? truckStatusFilter
         )
         {
-            var binsQuery = _context.Bin.AsQueryable();
+            //var binsQuery = _context.Bin.AsQueryable();
+            var binsQuery = _context.Bin.Include(b => b.Schedules).AsQueryable();
             var trucksQuery = _context.Trucks.AsQueryable();
+            //var binsWithSchedules = binsQuery.ToList();
+
+
 
             // Bin filters
             if (!string.IsNullOrEmpty(cityFilter))
@@ -47,8 +52,33 @@ namespace KutipSmart.Controllers
             var viewModel = new DashboardViewModel
             {
                 Bins = binsQuery.ToList(),
-                Trucks = trucksQuery.ToList()
+                Trucks = trucksQuery.ToList(),
+               
+
             };
+
+            // *** New code starts here: filter bins to only those with latest schedule Completed ***
+            var binsCompleted = viewModel.Bins.Where(bin =>
+            {
+                var latestSchedule = bin.Schedules
+                    .OrderByDescending(s => s.ScheduledDateTime)
+                    .FirstOrDefault();
+                return latestSchedule != null && latestSchedule.Status == ScheduleStatus.Completed;
+            }).ToList();
+
+            ViewBag.BinsCompleted = binsCompleted;
+            // *** New code ends here ***
+
+            // Inject latest schedule info into ViewBag (linked by BinId)
+            var latestScheduleStatusByBinId = viewModel.Bins
+                .ToDictionary(
+                    bin => bin.BinId,
+                    bin => bin.Schedules
+                        .OrderByDescending(s => s.ScheduledDateTime)
+                        .FirstOrDefault()
+                );
+
+            ViewBag.ScheduleLookup = latestScheduleStatusByBinId;
 
             // Dropdown data
             ViewBag.AllCities = _context.Bin.Select(b => b.City).Distinct().ToList();
