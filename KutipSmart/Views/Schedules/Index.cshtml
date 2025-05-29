@@ -27,10 +27,10 @@
                     <thead>
                         <tr>
                             <th>BIN</th>
+                            <th>STREET</th>
                             <th>TRUCK</th>
                             <th>SCHEDULED TIME</th>
                             <th>STATUS</th>
-                            <th>CREATED</th>
                             <th>ACTIONS</th>
                         </tr>
                     </thead>
@@ -39,19 +39,11 @@
                         {
                             <tr>
                                 <td>
-                                    @if (item.Bin != null)
-                                    {
-                                        @item.Bin.BinNo
-                                        if (!string.IsNullOrWhiteSpace(item.Bin.Street))
-                                        {
-                                            <text> - @item.Bin.Street, @item.Bin.City</text>
-                                        }
-                                    }
-                                    else
-                                    {
-                                        <span class="text-muted">N/A</span>
-                                    }
+                                    >@item.Bin.BinId
                                 </td>
+
+                                <td>@item.Bin.Street</td>
+
                                 <td>
                                     @if (item.Truck != null)
                                     {
@@ -76,7 +68,6 @@
                                         @item.Status
                                     </span>
                                 </td>
-                                <td>@item.CreatedAt.ToString("yyyy-MM-dd HH:mm")</td>
                                 <td>
                                     <a asp-action="Edit" asp-route-id="@item.ScheduleId" class="btn btn-warning btn-sm" title="Edit">
                                         <i class="fas fa-edit"></i>
