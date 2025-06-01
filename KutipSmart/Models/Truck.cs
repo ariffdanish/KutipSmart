@@ -8,7 +8,6 @@ namespace KutipSmart.Models
     public class Truck
     {
         
-
         [Key]
         public int TruckId { get; set; }
 
