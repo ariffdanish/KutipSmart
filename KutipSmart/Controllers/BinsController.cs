@@ -130,7 +130,12 @@ namespace KutipSmart.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
+        // GET: Bins/Map
+        public IActionResult Map()
+        {
+            List<Bin> bins = _context.Bin.ToList();
+            return View(bins);
+        }
 
 
 
