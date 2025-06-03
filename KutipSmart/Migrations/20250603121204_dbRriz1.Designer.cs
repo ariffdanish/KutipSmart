@@ -4,6 +4,7 @@ using KutipSmart.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KutipSmart.Migrations
 {
     [DbContext(typeof(KutipDbContext))]
-    partial class KutipDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250603121204_dbRriz1")]
+    partial class dbRriz1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,12 +44,6 @@ namespace KutipSmart.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<double>("Latitude")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Longitude")
-                        .HasColumnType("float");
-
                     b.Property<string>("PostCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -62,39 +59,12 @@ namespace KutipSmart.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("TruckId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("BinId");
 
-                    b.HasIndex("TruckId");
-
                     b.ToTable("Bin");
-                });
-
-            modelBuilder.Entity("KutipSmart.Models.Notification", b =>
-                {
-                    b.Property<int>("NotificationId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NotificationId"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsRead")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Message")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("NotificationId");
-
-                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("KutipSmart.Models.Schedule", b =>
@@ -148,12 +118,6 @@ namespace KutipSmart.Migrations
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<double>("CurrentLatitude")
-                        .HasColumnType("float");
-
-                    b.Property<double>("CurrentLongitude")
-                        .HasColumnType("float");
-
                     b.Property<string>("DriverName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -178,13 +142,6 @@ namespace KutipSmart.Migrations
                     b.HasKey("TruckId");
 
                     b.ToTable("Trucks");
-                });
-
-            modelBuilder.Entity("KutipSmart.Models.Bin", b =>
-                {
-                    b.HasOne("KutipSmart.Models.Truck", null)
-                        .WithMany("Bins")
-                        .HasForeignKey("TruckId");
                 });
 
             modelBuilder.Entity("KutipSmart.Models.Schedule", b =>
@@ -213,8 +170,6 @@ namespace KutipSmart.Migrations
 
             modelBuilder.Entity("KutipSmart.Models.Truck", b =>
                 {
-                    b.Navigation("Bins");
-
                     b.Navigation("Schedules");
                 });
 #pragma warning restore 612, 618

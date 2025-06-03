@@ -45,6 +45,8 @@ namespace KutipSmart.Models
 
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public virtual ICollection<Schedule> Schedules { get; set; } = new List<Schedule>();
-
+        
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 }
