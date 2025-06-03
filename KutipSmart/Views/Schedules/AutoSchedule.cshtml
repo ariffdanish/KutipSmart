@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Smart Auto Scheduling Check";
+}
+
+<div class="page-inner">
+    <div class="page-header">
+        <h4 class="page-title">Smart Auto Scheduling</h4>
+    </div>
+
+    <div class="alert @(ViewBag.CanSchedule ? "alert-success" : "alert-danger")">
+        <strong>@ViewBag.Message</strong>
+        <br />
+        Unscheduled bins: <strong>@ViewBag.BinCount</strong><br />
+        Available trucks: <strong>@ViewBag.TruckCount</strong>
+    </div>
+
+    @if (ViewBag.CanSchedule)
+    {
+        <form asp-action="AutoScheduleConfirmed" method="post">
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-cogs"></i> Start Smart Scheduling
+            </button>
+        </form>
+    }
+
+    <a asp-action="Index" class="btn btn-secondary mt-3">
+        <i class="fas fa-arrow-left"></i> Back to Schedule List
+    </a>
+
+
+</div>
